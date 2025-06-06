@@ -4,7 +4,9 @@ import { MantineProvider } from "@mantine/core";
 
 import App from "./App.tsx";
 
-import "@mantine/core/styles.css";
+import '@mantine/core/styles.layer.css'
+import '@mantine/carousel/styles.css';
+
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
