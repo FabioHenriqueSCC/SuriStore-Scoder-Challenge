@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   Card,
   Image,
@@ -13,13 +14,32 @@ import { IconHeart, IconShoppingCart } from "@tabler/icons-react";
 import type { ProductCardProps } from "../../types/products";
 
 import { useHeaderContext } from "../../contexts/Header/HeaderContext";
-
 import { priceFormatter } from "../../utils/formatter";
 
 import "@mantine/core/styles/UnstyledButton.css";
 import "@mantine/core/styles/Button.css";
-export const ProductCard = ({ product }: ProductCardProps) => {
-  const { shoppingCart, setShoppingCart } = useHeaderContext();
+
+export const ProductCard = ({
+  product,
+  showDescription = false,
+}: ProductCardProps) => {
+  const { shoppingCart, setShoppingCart, favorites, setFavorites } =
+    useHeaderContext();
+
+  const isFavorite = useMemo(
+    () => favorites.some((favProduct) => favProduct.id === product.id),
+    [favorites, product.id]
+  );
+
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      setFavorites(
+        favorites.filter((favProduct) => favProduct.id !== product.id)
+      );
+    } else {
+      setFavorites([...favorites, product]);
+    }
+  };
 
   return (
     <Card
@@ -30,13 +50,18 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       className="h-full flex flex-col relative transition-all duration-300 hover:shadow-xl"
     >
       <ActionIcon
-        variant="light"
+        variant={isFavorite ? "filled" : "light"}
+        color={isFavorite ? "red" : "gray"}
         aria-label="Adicionar aos favoritos"
         size="lg"
         className="absolute top-3 right-3 z-10 bg-white/80 backdrop-blur-sm hover:bg-white"
         radius="xl"
+        onClick={handleToggleFavorite}
       >
-        <IconHeart stroke={1.5} />
+        <IconHeart
+          stroke={1.5}
+          style={{ fill: isFavorite ? "currentColor" : "none" }}
+        />
       </ActionIcon>
 
       <Card.Section>
@@ -66,6 +91,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <Text fw={500} lineClamp={2} className="text-[#250D7C] my-3">
           {product.title}
         </Text>
+
+        {showDescription && (
+          <Text size="sm" c="dimmed" lineClamp={4} mb="sm">
+            {product.description}
+          </Text>
+        )}
 
         <Group gap="xs">
           <Rating value={product.rating.rate} fractions={2} readOnly />

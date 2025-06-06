@@ -70,6 +70,7 @@ const Header = () => {
         <button
           aria-label="Favoritos"
           className="text-white p-2 flex items-center hover:bg-[#392190]/75 rounded-md transition-colors"
+          onClick={() => navigate("/favorites")}
         >
           <IconHeart size={26} stroke={1.5} />
         </button>
