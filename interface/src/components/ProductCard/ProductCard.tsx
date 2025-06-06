@@ -12,32 +12,15 @@ import { IconHeart, IconShoppingCart } from "@tabler/icons-react";
 
 import type { ProductCardProps } from "../../types/products";
 
-import "@mantine/core/styles/UnstyledButton.css";
-import "@mantine/core/styles/Button.css";
+import { useHeaderContext } from "../../contexts/Header/HeaderContext";
+
 import { priceFormatter } from "../../utils/formatter";
 
-/**
- * ProductCard component for displaying individual product details.
- * 
- * This component is used to render a product card, which includes:
- * - An image of the product.
- * - The product's title, category, and price.
- * - A rating section showing user ratings and the number of reviews.
- * - A button for adding the product to the shopping cart.
- * - A heart icon button for adding the product to favorites.
- * 
- * The component is styled using Mantine's `Card`, `Button`, and other UI components, with custom styling for hover effects and responsiveness.
- * 
- * @param {ProductCardProps} props - The properties passed to the component.
- * @param {ProductCardProps['product']} props.product - The product data to be displayed in the card.
- * 
- * @returns {JSX.Element} The rendered product card component.
- * 
- * @example
- * // Example usage:
- * // <ProductCard product={productData} />
- */
+import "@mantine/core/styles/UnstyledButton.css";
+import "@mantine/core/styles/Button.css";
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const { shoppingCart, setShoppingCart } = useHeaderContext();
+
   return (
     <Card
       shadow="sm"
@@ -103,6 +86,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         fullWidth
         mt="md"
         radius="md"
+        onClick={() => setShoppingCart([...shoppingCart, product])}
         leftSection={<IconShoppingCart size={18} />}
       >
         Adicionar ao carrinho
