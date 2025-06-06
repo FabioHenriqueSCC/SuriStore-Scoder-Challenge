@@ -14,11 +14,13 @@
     "@mantine/core": "^8.0.2",
     "@mantine/hooks": "^8.0.2",
     "@tabler/icons-react": "^3.34.0",
+    "axios": "^1.9.0",
     "embla-carousel-react": "^8.6.0",
     "postcss-preset-mantine": "^1.17.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.2"
+    "react-router-dom": "^7.6.2",
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
