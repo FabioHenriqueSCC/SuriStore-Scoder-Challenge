@@ -1,8 +1,12 @@
+import Header from "./components/Header/Header";
 import AppRouter from "./router/Router";
 
 function App() {
   return (
-      <AppRouter/>
+    <>
+      <Header />
+      <AppRouter />
+    </>
   );
 }
 
