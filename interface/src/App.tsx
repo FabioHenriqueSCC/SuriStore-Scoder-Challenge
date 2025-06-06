@@ -1,11 +1,14 @@
 import Header from "./components/Header/Header";
+import { HeaderProvider } from "./contexts/Header/HeaderContext";
 import AppRouter from "./router/Router";
 
 function App() {
   return (
     <>
-      <Header />
-      <AppRouter />
+      <HeaderProvider>
+        <Header />
+        <AppRouter />
+      </HeaderProvider>
     </>
   );
 }
