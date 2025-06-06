@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { IconHeart, IconShoppingCart } from "@tabler/icons-react";
 
-import type { ProductCardProps } from "../../types/Products";
+import type { ProductCardProps } from "../../types/products";
 
 import "@mantine/core/styles/UnstyledButton.css";
 import "@mantine/core/styles/Button.css";

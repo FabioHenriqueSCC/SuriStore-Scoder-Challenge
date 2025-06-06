@@ -1,7 +1,7 @@
 import { Carousel } from "@mantine/carousel";
 import { Title } from "@mantine/core";
 
-import type { ProductsCarouselProps } from "../../types/Products";
+import type { ProductsCarouselProps } from "../../types/products";
 
 import { ProductCard } from "../ProductCard/ProductCard";
 
