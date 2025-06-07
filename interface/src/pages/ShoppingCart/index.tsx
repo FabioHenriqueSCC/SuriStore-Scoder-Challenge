@@ -34,7 +34,9 @@ export default function ShoppingCart() {
       }
     });
 
-    return Array.from(itemsMap.values());
+    const groupedItems = Array.from(itemsMap.values());
+
+    return groupedItems.sort((a, b) => a.id - b.id);
   }, [shoppingCart]);
 
   const handleUpdateQuantity = (productId: number, newQuantity: number) => {
