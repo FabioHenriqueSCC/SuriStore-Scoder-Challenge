@@ -9,10 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { Drawer, Button, Title, Text, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
+import type { Product } from "../../types/products";
+
+import { userInfosTranslations } from "../../constants/translations";
+
 import { useHeaderContext } from "../../contexts/Header/HeaderContext";
 import { useUserContext } from "../../contexts/UserContext.tsx/UserContext";
-
-import type { Product } from "../../types/products";
 
 import LogoScoder from "../../assets/LogoScoder.png";
 
@@ -226,11 +228,17 @@ const Header = () => {
               Informações do Usuário
             </Title>
             {Object.entries(userData)
-              .filter(([key]) => key.toLowerCase() !== "password")
+              .filter(([key]) => {
+                const lowerCaseKey = key.toLowerCase();
+                return (
+                  lowerCaseKey !== "password" &&
+                  lowerCaseKey !== "confirmpassword"
+                );
+              })
               .map(([key, value]) => (
                 <Text size="sm" key={key}>
                   <Text span fw={700} tt="capitalize">
-                    {key}:{" "}
+                    {userInfosTranslations[key] || key}:{" "}
                   </Text>
                   {String(value)}
                 </Text>
