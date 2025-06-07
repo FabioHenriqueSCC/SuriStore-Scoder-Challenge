@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   IconSearch,
   IconUserCircle,
@@ -19,12 +19,16 @@ import LogoScoder from "../../assets/LogoScoder.png";
 type CartItem = Product & { quantity: number };
 
 const Header = () => {
-  const { shoppingCart, setFavorites } = useHeaderContext();
+  const { shoppingCart, setFavorites, allProducts } = useHeaderContext();
   const { userData, setUserData } = useUserContext();
   const navigate = useNavigate();
 
   const [drawerOpened, { open: openDrawer, close: closeDrawer }] =
     useDisclosure(false);
+
+  const [isSuggestionsVisible, setSuggestionsVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const processedCart = useMemo(() => {
     if (!shoppingCart) return [];
     const cartWithQuantities = shoppingCart.reduce((acc, product) => {
@@ -39,6 +43,22 @@ const Header = () => {
     return Object.values(cartWithQuantities);
   }, [shoppingCart]);
 
+  const suggestedProducts = useMemo(() => {
+    if (!allProducts || allProducts.length === 0) return [];
+
+    if (searchTerm.trim() !== "") {
+      const lowercasedTerm = searchTerm.toLowerCase();
+      return allProducts.filter((product) =>
+        product.title.toLowerCase().includes(lowercasedTerm)
+      );
+    }
+
+    const sorted = [...allProducts].sort(
+      (a, b) => b.rating.rate - a.rating.rate
+    );
+    return sorted.slice(0, 10);
+  }, [allProducts, searchTerm]);
+
   const totalItems = shoppingCart ? shoppingCart.length : 0;
 
   const handleLogout = () => {
@@ -46,6 +66,12 @@ const Header = () => {
     setUserData(null);
     setFavorites([]);
     closeDrawer();
+  };
+
+  const handleSuggestionClick = (productId: number) => {
+    navigate(`/product/${productId}`);
+    setSuggestionsVisible(false);
+    setSearchTerm("");
   };
 
   return (
@@ -57,17 +83,56 @@ const Header = () => {
             Bem vindo a SuriStore, a toca dos Suricoders!
           </span>
         </div>
-        <div className="w-full max-w-[240px] sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg">
+
+        <div className="relative w-full max-w-[240px] sm:max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg">
           <div className="relative flex items-center">
             <input
               type="text"
               placeholder="O que você procura?"
               className="w-full py-2 px-4 rounded-lg text-sm text-gray-700 pr-10 focus:outline-none focus:ring-2 focus:ring-[#573FAE] focus:border-transparent"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => setSuggestionsVisible(true)}
+              onBlur={() => setTimeout(() => setSuggestionsVisible(false), 150)}
             />
             <span className="absolute inset-y-0 right-0 flex items-center pr-3">
               <IconSearch size={20} className="text-gray-500" stroke={2} />
             </span>
           </div>
+          {isSuggestionsVisible && (
+            <div className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-xl z-50 overflow-hidden border border-gray-200">
+              {suggestedProducts.length > 0 ? (
+                <>
+                  <h4 className="p-3 text-sm font-semibold text-gray-600 border-b">
+                    {searchTerm
+                      ? "Resultados da busca"
+                      : "Produtos mais populares na toca ✨"}
+                  </h4>
+                  <ul className="max-h-96 overflow-y-auto">
+                    {suggestedProducts.map((product) => (
+                      <li key={product.id}>
+                        <button
+                          onClick={() => handleSuggestionClick(product.id)}
+                          className="w-full text-left p-3 text-sm text-gray-800 hover:bg-gray-100 transition-colors flex items-center space-x-3"
+                        >
+                          <img
+                            src={product.image}
+                            alt={product.title}
+                            className="w-10 h-10 object-cover rounded"
+                          />
+                          <span className="truncate">{product.title}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <div className="p-4 text-center text-sm text-gray-500">
+                  <p>Oops! Nenhum suricato encontrou o que você procura.</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex items-center space-x-3 sm:space-x-4 shrink-0">
@@ -148,7 +213,6 @@ const Header = () => {
           </div>
         </div>
       </header>
-
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
