@@ -8,6 +8,8 @@ import { CatalogNav } from "./components/CatalogNav/CatalogNav";
 import { HeaderProvider } from "./contexts/Header/HeaderContext";
 import { UserProvider } from "./contexts/UserContext.tsx/UserContext";
 
+import { useDynamicTabTitle } from "./hooks/useDynamicTabTitle";
+
 import { handleCategoryClick } from "./utils/effects";
 
 import AppRouter from "./router/Router";
@@ -15,6 +17,8 @@ import AppRouter from "./router/Router";
 function App() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+
+  useDynamicTabTitle("SuriStore", "Volte para a toca, Suricoder!");
 
   return (
     <>
