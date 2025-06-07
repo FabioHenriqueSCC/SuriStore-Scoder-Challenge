@@ -1,10 +1,25 @@
 import axios, { type AxiosResponse } from "axios";
 
 import type { Product } from "../types/products";
+import type { LoginFormValues } from "../types/user";
 
 const api = axios.create({
   baseURL: "https://fakestoreapi.com",
 });
+
+export const postUserAuth = async (
+  loginInfos: LoginFormValues
+): Promise<AxiosResponse<{ token: string }>> => {
+  const url = "/auth/login";
+
+  try {
+    const apiResponse = api.post(url, loginInfos);
+    return apiResponse;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 /**
  * Fetches all products from the API.
