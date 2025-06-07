@@ -46,3 +46,17 @@ export const getAllProducts = async (): Promise<AxiosResponse<Product[]>> => {
     throw error;
   }
 };
+
+export const getProductWithID = async (
+  id: string | undefined
+): Promise<AxiosResponse<Product>> => {
+  const url = `/products/${id}`;
+
+  try {
+    const apiResponse = api.get(url);
+    return apiResponse;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
