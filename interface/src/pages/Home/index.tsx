@@ -3,6 +3,8 @@ import { toast } from "react-toastify";
 
 import type { Product } from "../../types/products";
 
+import { useHeaderContext } from "../../contexts/Header/HeaderContext";
+
 import { ProductsCarousel } from "../../components/ProductsCarousel/ProductsCarousel";
 
 import { productCategory } from "../../constants/productCategory";
@@ -10,6 +12,7 @@ import { productCategory } from "../../constants/productCategory";
 import { getAllProducts } from "../../services/storeApi";
 
 export default function Home() {
+  const { setAllProducts } = useHeaderContext();
   const [categorizedProducts, setCategorizedProducts] = useState<
     Record<string, Product[]>
   >({});
@@ -28,6 +31,8 @@ export default function Home() {
         );
         return;
       }
+
+      setAllProducts(products);
 
       const groupedProducts: Record<string, Product[]> = {
         valentines: [],
@@ -51,7 +56,7 @@ export default function Home() {
     };
 
     fetchAndGroupProducts();
-  }, []);
+  }, [setAllProducts]);
 
   return (
     <div className="p-4">

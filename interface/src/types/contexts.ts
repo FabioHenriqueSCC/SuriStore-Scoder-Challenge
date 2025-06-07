@@ -3,6 +3,8 @@ import type { Product } from "./products";
 import type { UserData } from "./user";
 
 export interface HeaderContextType {
+  allProducts: Product[];
+  setAllProducts: Dispatch<SetStateAction<Product[]>>;
   favorites: Product[];
   setFavorites: Dispatch<SetStateAction<Product[]>>;
   shoppingCart: Product[];

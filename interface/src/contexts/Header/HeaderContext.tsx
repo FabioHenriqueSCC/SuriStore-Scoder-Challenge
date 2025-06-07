@@ -9,10 +9,13 @@ import type {
 const HeaderContext = createContext<HeaderContextType | null>(null);
 
 export const HeaderProvider = ({ children }: MyContextProviderProps) => {
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [favorites, setFavorites] = useState<Product[]>([]);
   const [shoppingCart, setShoppingCart] = useState<Product[]>([]);
 
   const contextValue = {
+    allProducts,
+    setAllProducts,
     shoppingCart,
     setShoppingCart,
     favorites,
