@@ -31,7 +31,8 @@ export const ProductCard = ({
     [favorites, product.id]
   );
 
-  const handleToggleFavorite = () => {
+  const handleToggleFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     if (isFavorite) {
       setFavorites(
         favorites.filter((favProduct) => favProduct.id !== product.id)
@@ -39,6 +40,11 @@ export const ProductCard = ({
     } else {
       setFavorites([...favorites, product]);
     }
+  };
+
+  const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setShoppingCart([...shoppingCart, product]);
   };
 
   return (
@@ -122,7 +128,7 @@ export const ProductCard = ({
           fullWidth
           mt="md"
           radius="md"
-          onClick={() => setShoppingCart([...shoppingCart, product])}
+          onClick={handleAddToCart}
           leftSection={<IconShoppingCart size={18} />}
         >
           Adicionar ao carrinho
