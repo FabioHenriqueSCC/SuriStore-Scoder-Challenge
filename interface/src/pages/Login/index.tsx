@@ -24,6 +24,7 @@ const Login: FC = () => {
   const handleLoginSubmit = async (userInfos: UserData | null) => {
     if (userInfos === null) {
       toast.warning("Cadastre-se na toca!", { autoClose: 5000 });
+      setView("register")
       return;
     }
 
