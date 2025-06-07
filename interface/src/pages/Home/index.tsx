@@ -60,11 +60,9 @@ export default function Home() {
           const products = categorizedProducts[config.key];
           if (products && products.length > 0) {
             return (
-              <ProductsCarousel
-                key={config.key}
-                title={config.title}
-                products={products}
-              />
+              <div key={config.key} id={config.key}>
+                <ProductsCarousel title={config.title} products={products} />
+              </div>
             );
           }
           return null;

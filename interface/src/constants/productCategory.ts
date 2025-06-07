@@ -20,3 +20,11 @@ export const productCategory = [
     title: "Roupas Femininas",
   },
 ];
+
+export const navigationItems = [
+  { label: "Dia dos namorados", targetId: "valentines", isHighlight: true },
+  { label: "Joias", targetId: "jewelery" },
+  { label: "Eletrônicos", targetId: "electronics" },
+  { label: "Roupas masculinas", targetId: "men's clothing" },
+  { label: "Roupas femininas", targetId: "women's clothing" },
+];
