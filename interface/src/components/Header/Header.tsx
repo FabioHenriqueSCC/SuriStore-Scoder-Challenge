@@ -42,7 +42,7 @@ const Header = () => {
   const totalItems = shoppingCart ? shoppingCart.length : 0;
 
   const handleLogout = () => {
-    localStorage.removeItem("user-token");
+    localStorage.removeItem("token");
     setUserData(null);
     setFavorites([]);
     closeDrawer();
