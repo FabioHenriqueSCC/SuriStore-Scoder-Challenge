@@ -5,43 +5,70 @@ import type { Product } from "../../types/products";
 
 import { ProductsCarousel } from "../../components/ProductsCarousel/ProductsCarousel";
 
+import { productCategory } from "../../constants/productCategory";
+
 import { getAllProducts } from "../../services/storeApi";
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [categorizedProducts, setCategorizedProducts] = useState<
+    Record<string, Product[]>
+  >({});
 
   useEffect(() => {
-    /**
-     * Fetches and sets the list of all products when the component is mounted.
-     *
-     * This effect runs once when the component is mounted, fetching the list of products from an API. If the request is successful, the products are stored in the component's state using `setProducts`. If an error occurs during the fetch operation, an error toast is shown to the user.
-     *
-     * The `useEffect` hook depends on an empty dependency array (`[]`), meaning it will only run once after the initial render.
-     *
-     * @async
-     * @function listAllProducts
-     *
-     * @returns {void} This hook does not return anything.
-     */
-    const listAllProducts = async () => {
+    const fetchAndGroupProducts = async () => {
+      let products;
+
       try {
-        const allProducts = await getAllProducts();
-        setProducts(allProducts.data);
+        const response = await getAllProducts();
+        products = response.data;
       } catch {
         toast.error(
-          "Ocorreu um erro ao listar os produtos disponíves. Tente novamente mais tarde!",
+          "Ocorreu um erro ao listar os produtos. Tente novamente mais tarde!",
           { autoClose: 5000 }
         );
+        return;
       }
+
+      const groupedProducts: Record<string, Product[]> = {
+        valentines: [],
+      };
+
+      for (const product of products) {
+        if (!groupedProducts[product.category]) {
+          groupedProducts[product.category] = [];
+        }
+        groupedProducts[product.category].push(product);
+
+        if (
+          product.category === "men's clothing" ||
+          product.category === "women's clothing"
+        ) {
+          groupedProducts.valentines.push(product);
+        }
+      }
+
+      setCategorizedProducts(groupedProducts);
     };
 
-    listAllProducts();
+    fetchAndGroupProducts();
   }, []);
 
   return (
     <div className="p-4">
-      <div className="w-full md:w-4/5 lg:w-2/3 mx-auto">
-        <ProductsCarousel title="Catálogo" products={products} />
+      <div className="w-full md:w-4/5 lg:w-2/3 mx-auto flex flex-col gap-10">
+        {productCategory.map((config) => {
+          const products = categorizedProducts[config.key];
+          if (products && products.length > 0) {
+            return (
+              <ProductsCarousel
+                key={config.key}
+                title={config.title}
+                products={products}
+              />
+            );
+          }
+          return null;
+        })}
       </div>
     </div>
   );
