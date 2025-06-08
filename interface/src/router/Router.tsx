@@ -4,7 +4,7 @@ import ShoppingCart from "../pages/ShoppingCart";
 import Favorites from "../pages/Favorites";
 import Login from "../pages/Login";
 import Buy from "../pages/Buy";
-import { ProductPage } from "../pages/Product";
+import ProductPage from "../pages/Product";
 
 const AppRouter = () => {
   return (

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useDynamicTabTitle(activeTitle: string, inactiveTitle: string) {
+export const useDynamicTabTitle = (activeTitle: string, inactiveTitle: string) => {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {

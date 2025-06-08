@@ -13,11 +13,11 @@ import type { CartItemCardProps } from "../../types/cart";
 
 import { priceFormatter } from "../../utils/formatter";
 
-export function CartCard({
+export const CartCard = ({
   item,
   onUpdateQuantity,
   onRemove,
-}: CartItemCardProps) {
+}: CartItemCardProps) => {
   const handleIncrease = () => {
     onUpdateQuantity(item.id, item.quantity + 1);
   };

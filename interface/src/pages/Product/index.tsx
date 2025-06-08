@@ -25,7 +25,7 @@ import { priceFormatter } from "../../utils/formatter";
 
 import { getProductWithID } from "../../services/storeApi";
 
-export const ProductPage = () => {
+export default function ProductPage() {
   const { productId } = useParams<{ productId: string }>();
   const navigate = useNavigate();
   const { shoppingCart, setShoppingCart } = useHeaderContext();
@@ -150,4 +150,4 @@ export const ProductPage = () => {
       </Grid>
     </Container>
   );
-};
+}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import type { FC } from "react";
 import { Paper, Container, SegmentedControl } from "@mantine/core";
 import type { UserData } from "../../types/user";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
@@ -9,7 +8,7 @@ import { toast } from "react-toastify";
 import { postUserAuth } from "../../services/storeApi";
 import { useNavigate } from "react-router-dom";
 
-const Login: FC = () => {
+function Login() {
   const { userData, setUserData } = useUserContext();
 
   const [view, setView] = useState<"register" | "login">("login");

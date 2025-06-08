@@ -7,7 +7,7 @@ import type { CartSummaryProps } from "../../types/cart";
 
 import { priceFormatter } from "../../utils/formatter";
 
-export function CartSummary({ items }: CartSummaryProps) {
+export const CartSummary = ({ items }: CartSummaryProps) => {
   const total = useMemo(() => {
     return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
   }, [items]);
