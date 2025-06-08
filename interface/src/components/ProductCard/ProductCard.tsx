@@ -19,6 +19,30 @@ import { priceFormatter } from "../../utils/formatter";
 import "@mantine/core/styles/UnstyledButton.css";
 import "@mantine/core/styles/Button.css";
 
+/**
+ * ProductCard component for displaying individual product details in a card format.
+ *
+ * This component displays a product card with:
+ * - Product image, title, and category.
+ * - An optional description that can be shown based on the `showDescription` prop.
+ * - Product rating and number of reviews.
+ * - A button for adding the product to the shopping cart.
+ * - A button for toggling the product as a favorite.
+ *
+ * When the favorite button is clicked, the product is either added to or removed from the user's favorites list.
+ * When the add-to-cart button is clicked, the product is added to the shopping cart.
+ * The product details link to the individual product page.
+ *
+ * @param {ProductCardProps} props - The properties passed to the component.
+ * @param {Product} props.product - The product to display.
+ * @param {boolean} [props.showDescription=false] - A flag to determine whether to show the product description.
+ *
+ * @returns {JSX.Element} The rendered product card.
+ *
+ * @example
+ * // Example usage:
+ * // <ProductCard product={productData} showDescription={true} />
+ */
 export const ProductCard = ({
   product,
   showDescription = false,

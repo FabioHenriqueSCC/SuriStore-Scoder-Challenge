@@ -7,6 +7,23 @@ import { ProductCard } from "../ProductCard/ProductCard";
 
 import "@mantine/core/styles/Title.css";
 
+/**
+ * ProductsCarousel component for displaying a carousel of product cards.
+ *
+ * This component renders a carousel of products, allowing users to scroll through product cards.
+ * It displays a title at the top and a list of product cards, each rendered using the `ProductCard` component.
+ * The carousel includes indicators for navigation and is configured to loop through the slides and display them in a responsive layout.
+ *
+ * @param {ProductsCarouselProps} props - The properties passed to the component.
+ * @param {string} props.title - The title displayed above the carousel.
+ * @param {Product[]} props.products - The list of products to display in the carousel.
+ *
+ * @returns {JSX.Element} The rendered product carousel component.
+ *
+ * @example
+ * // Example usage:
+ * // <ProductsCarousel title="Featured Products" products={productList} />
+ */
 export const ProductsCarousel = ({
   title,
   products,

@@ -13,6 +13,29 @@ import type { CartItemCardProps } from "../../types/cart";
 
 import { priceFormatter } from "../../utils/formatter";
 
+/**
+ * CartCard component for displaying individual cart items.
+ * 
+ * This component renders a card displaying a single item in the shopping cart, including:
+ * - The product image, title, category, and description.
+ * - The product price formatted as currency.
+ * - A quantity control with buttons for increasing and decreasing the quantity.
+ * - A button for removing the item from the cart.
+ * 
+ * The quantity controls are handled with the `onUpdateQuantity` function, and the item can be removed using the `onRemove` function. 
+ * The card adjusts its layout based on screen size using Mantine's `Flex` component.
+ * 
+ * @param {CartItemCardProps} props - The properties passed to the component.
+ * @param {Product} props.item - The product data for the cart item.
+ * @param {function} props.onUpdateQuantity - Function to update the quantity of the item in the cart.
+ * @param {function} props.onRemove - Function to remove the item from the cart.
+ * 
+ * @returns {JSX.Element} The rendered cart item card.
+ * 
+ * @example
+ * // Example usage:
+ * // <CartCard item={cartItem} onUpdateQuantity={updateQuantity} onRemove={removeItem} />
+ */
 export const CartCard = ({
   item,
   onUpdateQuantity,

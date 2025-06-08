@@ -7,6 +7,25 @@ import type { CartSummaryProps } from "../../types/cart";
 
 import { priceFormatter } from "../../utils/formatter";
 
+/**
+ * CartSummary component for displaying the summary of the shopping cart.
+ *
+ * This component renders a summary card displaying the following:
+ * - The subtotal of the cart, calculated by multiplying each item's price by its quantity.
+ * - The total amount due, which is the same as the subtotal in this case.
+ * - A button that triggers the checkout process, which checks if the user is logged in before navigating to the checkout page.
+ *
+ * If the user is not logged in, a warning toast is shown, and the user is redirected to the login page.
+ *
+ * @param {CartSummaryProps} props - The properties passed to the component.
+ * @param {Array} props.items - The list of items in the cart, each containing product details and quantity.
+ *
+ * @returns {JSX.Element} The rendered cart summary card.
+ *
+ * @example
+ * // Example usage:
+ * // <CartSummary items={cartItems} />
+ */
 export const CartSummary = ({ items }: CartSummaryProps) => {
   const total = useMemo(() => {
     return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -58,4 +77,4 @@ export const CartSummary = ({ items }: CartSummaryProps) => {
       </Button>
     </Card>
   );
-}
+};

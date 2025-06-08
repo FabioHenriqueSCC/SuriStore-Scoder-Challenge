@@ -15,6 +15,31 @@ import { IMaskInput } from "react-imask";
 import type { RegisterFormProps, UserData } from "../../types/user";
 import type { FC } from "react";
 
+/**
+ * RegisterForm component for handling user registration.
+ *
+ * This component renders a registration form with fields for:
+ * - First Name
+ * - Last Name
+ * - Username
+ * - Password and Confirm Password
+ * - CPF (Brazilian tax ID)
+ * - Phone number
+ * - Gender
+ * - Birth Date
+ *
+ * It uses the `useForm` hook from Mantine to handle form validation and submission.
+ * The form is validated with specific rules for each field, and upon successful submission, the `onRegister` callback is called.
+ *
+ * @param {RegisterFormProps} props - The properties passed to the component.
+ * @param {function} props.onRegister - The callback function that is triggered when the form is successfully submitted, receiving the form data.
+ *
+ * @returns {JSX.Element} The rendered registration form.
+ *
+ * @example
+ * // Example usage:
+ * // <RegisterForm onRegister={handleRegister} />
+ */
 const RegisterForm: FC<RegisterFormProps> = ({ onRegister }) => {
   const form = useForm<UserData & { confirmPassword: string }>({
     mode: "uncontrolled",

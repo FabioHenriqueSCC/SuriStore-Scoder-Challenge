@@ -20,6 +20,24 @@ import LogoScoder from "../../assets/LogoScoder.png";
 
 type CartItem = Product & { quantity: number };
 
+/**
+ * Header component that displays the top navigation for the store.
+ * 
+ * This component provides the header layout for the application, including:
+ * - The store logo and welcome message.
+ * - A search bar with product suggestions and search results.
+ * - Buttons for account access, favorites, and shopping cart.
+ * - A drawer for displaying user information and logout functionality.
+ * 
+ * The search bar triggers suggestions based on the user's search term, displaying popular products or search results.
+ * The shopping cart button displays the number of items in the cart and shows a summary of the cart items on hover.
+ * 
+ * @returns {JSX.Element} The rendered header with navigation and search functionality.
+ * 
+ * @example
+ * // Example usage:
+ * // <Header />
+ */
 const Header = () => {
   const { shoppingCart, setFavorites, allProducts } = useHeaderContext();
   const { userData, setUserData } = useUserContext();
