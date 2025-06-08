@@ -18,6 +18,18 @@ export default function Home() {
   >({});
 
   useEffect(() => {
+    /**
+     * Fetches and groups products by category when the component mounts.
+     *
+     * This effect fetches the list of products from the API and groups them into categories.
+     * The grouped products are stored in the state, with a special category for "valentines" that includes products from both men's and women's clothing.
+     * If the fetch operation fails, an error toast is displayed, and no products are grouped.
+     *
+     * @async
+     * @function fetchAndGroupProducts
+     *
+     * @returns {void} No value is returned. The function updates state with the fetched and grouped products.
+     */
     const fetchAndGroupProducts = async () => {
       let products;
 

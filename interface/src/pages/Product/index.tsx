@@ -34,6 +34,18 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    /**
+     * Fetches and sets product details based on the product ID.
+     *
+     * This effect fetches the product details from the API using the `getProductWithID` function whenever the `productId` changes.
+     * The product data is stored in the `setProduct` state, and the loading state is handled to indicate when the fetch operation is in progress.
+     * If the product fetch fails, the product state is set to `null`.
+     *
+     * @async
+     * @function listProduct
+     *
+     * @returns {void} No value is returned. The function updates the product state and manages loading state.
+     */
     const listProduct = async () => {
       setLoading(true);
 
@@ -53,6 +65,19 @@ export default function ProductPage() {
     }
   }, [productId, navigate]);
 
+  /**
+   * Handles the "Buy Now" action.
+   *
+   * This function checks if the user is authenticated by looking for a token in `localStorage`.
+   * If the token is not found, the user is redirected to the login page with a warning toast message.
+   * If the token is present, the user is navigated to the purchase page.
+   *
+   * @returns {void} No value is returned. The function triggers navigation based on the authentication state.
+   *
+   * @example
+   * // Example usage:
+   * // handleBuyNow();
+   */
   const handleBuyNow = () => {
     const token = localStorage.getItem("token");
     if (token === null) {

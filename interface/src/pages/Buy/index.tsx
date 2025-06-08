@@ -68,6 +68,19 @@ export default function Buy() {
     },
   });
 
+  /**
+   * Handles the payment process with simulated delay and notifications.
+   *
+   * This function simulates the payment processing by introducing a random delay between 5 to 10 seconds.
+   * During the delay, an "info" toast is shown to indicate the payment is being processed. Once the payment is completed,
+   * a success toast is shown. After that, a reminder warning and error toast are displayed to clarify that it's a fictional transaction.
+   * After the process, the shopping cart is cleared, the form is reset, and the user is navigated to the home page.
+   *
+   * @async
+   * @function handlePayment
+   *
+   * @returns {void} No value is returned. The function triggers UI updates and navigation.
+   */
   const handlePayment = async () => {
     setIsProcessing(true);
     toast.info("Processando seu pagamento... Aguarde.");
@@ -96,6 +109,19 @@ export default function Buy() {
     navigate("/");
   };
 
+  /**
+   * Handles the form submission click event for the payment process.
+   *
+   * This function triggers the payment process when the user submits the form.
+   * If the active tab is "credit" or "debit", it first calls the `form.onSubmit` function to validate and submit the form data before invoking the `handlePayment` function.
+   * If the active tab is neither "credit" nor "debit", it directly calls the `handlePayment` function.
+   *
+   * @returns {void} No value is returned. The function triggers form validation and payment handling.
+   *
+   * @example
+   * // Example usage:
+   * // handleSubmitClick();
+   */
   const handleSubmitClick = () => {
     if (activeTab === "credit" || activeTab === "debit") {
       form.onSubmit(handlePayment)();

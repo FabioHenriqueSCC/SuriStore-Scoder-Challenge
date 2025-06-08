@@ -39,6 +39,17 @@ export default function ShoppingCart() {
     return groupedItems.sort((a, b) => a.id - b.id);
   }, [shoppingCart]);
 
+  /**
+   * Handles the update of product quantity in the shopping cart.
+   *
+   * This function finds the product with the specified `productId` in the shopping cart and updates its quantity.
+   * If the product is found, the function removes the current instances of the product and adds the new number of product instances to the cart.
+   *
+   * @param {number} productId - The ID of the product to update.
+   * @param {number} newQuantity - The new quantity of the product.
+   *
+   * @returns {void} No value is returned. The function updates the shopping cart state.
+   */
   const handleUpdateQuantity = (productId: number, newQuantity: number) => {
     const productToUpdate = shoppingCart.find((p) => p.id === productId);
     if (!productToUpdate) return;
@@ -50,6 +61,15 @@ export default function ShoppingCart() {
     setShoppingCart([...cartWithoutProduct, ...newProductInstances]);
   };
 
+  /**
+   * Handles removing a product from the shopping cart.
+   *
+   * This function filters out the product with the specified `productId` from the shopping cart and updates the cart state accordingly.
+   *
+   * @param {number} productId - The ID of the product to remove from the cart.
+   *
+   * @returns {void} No value is returned. The function updates the shopping cart state.
+   */
   const handleRemoveItem = (productId: number) => {
     setShoppingCart((currentItems) =>
       currentItems.filter((item) => item.id !== productId)
