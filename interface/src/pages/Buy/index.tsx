@@ -96,10 +96,18 @@ export default function Buy() {
     navigate("/");
   };
 
+  const handleSubmitClick = () => {
+    if (activeTab === "credit" || activeTab === "debit") {
+      form.onSubmit(handlePayment)();
+    } else {
+      handlePayment();
+    }
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen flex items-center justify-center p-4">
       <Paper shadow="xl" p="xl" radius="md" className="w-full max-w-lg">
-        <form onSubmit={form.onSubmit(handlePayment)}>
+        <form>
           <Stack gap="lg">
             <header className="text-center">
               <Title order={2} c="dark.5">
@@ -109,11 +117,13 @@ export default function Buy() {
                 Escolha a forma de pagamento abaixo
               </Text>
             </header>
+
             <Paper withBorder p="md" radius="md">
               <Title order={4} ta="center" c="violet.7">
                 Total da Compra: {priceFormatter(totalPrice)}
               </Title>
             </Paper>
+
             <Alert
               variant="light"
               color="orange"
@@ -125,6 +135,7 @@ export default function Buy() {
               <strong>NÃO insira dados reais</strong>. Nenhuma informação será
               processada ou armazenada.
             </Alert>
+
             <Tabs
               value={activeTab}
               onChange={(value) => {
@@ -158,6 +169,7 @@ export default function Buy() {
                   Débito
                 </Tabs.Tab>
               </Tabs.List>
+
               <Tabs.Panel value="pix" pt="lg">
                 <Stack align="center" gap="md">
                   <Text ta="center" size="sm">
@@ -177,6 +189,7 @@ export default function Buy() {
                   <PixTimer />
                 </Stack>
               </Tabs.Panel>
+
               <Tabs.Panel value="ticket" pt="lg">
                 <Stack align="center" gap="md" className="py-8">
                   <Text ta="center" size="sm">
@@ -196,6 +209,7 @@ export default function Buy() {
                   </Text>
                 </Stack>
               </Tabs.Panel>
+
               <Tabs.Panel value="credit" pt="lg">
                 <CardFormFields
                   form={form}
@@ -205,6 +219,7 @@ export default function Buy() {
                   totalPrice={totalPrice}
                 />
               </Tabs.Panel>
+
               <Tabs.Panel value="debit" pt="lg">
                 <CardFormFields
                   form={form}
@@ -215,7 +230,11 @@ export default function Buy() {
                 />
               </Tabs.Panel>
             </Tabs>
-            <PaymentButton type="submit" isProcessing={isProcessing} />
+            <PaymentButton
+              type="button"
+              onClick={handleSubmitClick}
+              isProcessing={isProcessing}
+            />
           </Stack>
         </form>
       </Paper>
