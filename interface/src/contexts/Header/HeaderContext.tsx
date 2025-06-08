@@ -29,6 +29,30 @@ export const HeaderProvider = ({ children }: MyContextProviderProps) => {
   );
 };
 
+/**
+ * HeaderContext provider and custom hook for managing header-related state.
+ *
+ * This context provides global state management for the header section, including:
+ * - All products (`allProducts`)
+ * - Favorite products (`favorites`)
+ * - Shopping cart items (`shoppingCart`)
+ *
+ * The `HeaderProvider` component wraps the application and provides access to these state values and their setters.
+ * The `useHeaderContext` hook allows consuming components to access and update the state managed by the `HeaderContext`.
+ *
+ * @param {MyContextProviderProps} props - The properties passed to the component.
+ * @param {ReactNode} props.children - The child components that will have access to the context.
+ *
+ * @returns {JSX.Element} The rendered provider component with access to the header context.
+ *
+ * @example
+ * // Example usage:
+ * // <HeaderProvider>
+ * //   <YourComponent />
+ * // </HeaderProvider>
+ *
+ * @throws {Error} Throws an error if `useHeaderContext` is used outside of a `HeaderProvider`.
+ */
 export const useHeaderContext = () => {
   const context = useContext(HeaderContext);
 
